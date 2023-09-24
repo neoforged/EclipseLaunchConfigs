@@ -13,17 +13,14 @@ import java.util.function.Function;
 
 @Data
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-public final class SimpleAttribute<T> implements ELCAttribute {
+public final class SimpleAttribute<T> implements ELCAttribute<SimpleAttribute<T>> {
     private final String type;
     private final String key;
     private final SimpleValue<T> value;
 
+    @Override
     public SimpleAttribute<T> withKey(String key) {
         return new SimpleAttribute<>(this.type, key, this.value);
-    }
-
-    public SimpleAttribute<T> prependKeyPath(String... path) {
-        return withKey(String.join(".", path) + "." + this.key);
     }
 
     @Override

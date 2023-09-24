@@ -16,7 +16,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 @RequiredArgsConstructor
-public final class ListAttribute implements ELCAttribute {
+public final class ListAttribute implements ELCAttribute<ListAttribute> {
     private final String key;
     private final List<SimpleValue<?>> values;
 
@@ -32,6 +32,11 @@ public final class ListAttribute implements ELCAttribute {
     public ListAttribute addAll(Iterable<SimpleValue<?>> values) {
         values.forEach(this::add);
         return this;
+    }
+
+    @Override
+    public ListAttribute withKey(String key) {
+        return new ListAttribute(key, this.values);
     }
 
     @Override

@@ -48,8 +48,8 @@ public final class GradleLaunchConfig extends LaunchConfig {
     }
 
     @Override
-    public List<ELCAttribute> finishChildren() {
-        final List<ELCAttribute> attributes = new ArrayList<>();
+    public List<ELCAttribute<?>> finishChildren() {
+        final List<ELCAttribute<?>> attributes = new ArrayList<>();
 
         attributes.add(ELCAttribute.list("tasks", tasks.stream().map(SimpleValue::string).toArray(SimpleValue[]::new)));
         attributes.add(ELCAttribute.list("arguments", arguments.stream().map(SimpleValue::string).toArray(SimpleValue[]::new)));
@@ -68,7 +68,7 @@ public final class GradleLaunchConfig extends LaunchConfig {
         return attributes;
     }
 
-    private static void addStringIfNotNull(List<ELCAttribute> attributes, String key, @Nullable String value) {
+    private static void addStringIfNotNull(List<ELCAttribute<?>> attributes, String key, @Nullable String value) {
         if (value != null) {
             attributes.add(ELCAttribute.string(key, value));
         }

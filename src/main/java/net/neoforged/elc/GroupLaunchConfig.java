@@ -25,8 +25,8 @@ public class GroupLaunchConfig extends LaunchConfig {
     }
 
     @Override
-    public List<ELCAttribute> finishChildren() {
-        final List<ELCAttribute> attributes = new ArrayList<>();
+    public List<ELCAttribute<?>> finishChildren() {
+        final List<ELCAttribute<?>> attributes = new ArrayList<>();
         for (int i = 0; i < entries.size(); i++) {
             final int finalI = i;
             entries.get(i).build().forEach(attr -> attributes.add(attr.prependKeyPath("org.eclipse.debug.core.launchGroup", Integer.toString(finalI))));
@@ -70,6 +70,14 @@ public class GroupLaunchConfig extends LaunchConfig {
             if (param != null) {
                 attributes.add(ELCAttribute.string("actionParam", param.valueAsString()));
             }
+        }
+
+        public static Action outputRegexp(String regex) {
+            return new Action(ActionType.OUTPUT_REGEXP, SimpleValue.string(regex));
+        }
+
+        public static Action waitForTermination(int delay) {
+            return new Action(ActionType.WAIT_FOR_TERMINATION, SimpleValue.integer(delay));
         }
     }
 

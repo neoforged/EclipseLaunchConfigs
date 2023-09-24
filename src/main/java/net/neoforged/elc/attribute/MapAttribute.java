@@ -15,7 +15,7 @@ import java.util.Map;
 @ToString
 @EqualsAndHashCode
 @RequiredArgsConstructor
-public final class MapAttribute implements ELCAttribute {
+public final class MapAttribute implements ELCAttribute<MapAttribute> {
     private final String key;
     private final Map<String, SimpleValue<?>> attributes;
 
@@ -30,6 +30,11 @@ public final class MapAttribute implements ELCAttribute {
 
     public MapAttribute put(SimpleAttribute<?> attribute) {
         return put(attribute.getKey(), attribute.getValue());
+    }
+
+    @Override
+    public MapAttribute withKey(String key) {
+        return new MapAttribute(key, this.attributes);
     }
 
     @Override

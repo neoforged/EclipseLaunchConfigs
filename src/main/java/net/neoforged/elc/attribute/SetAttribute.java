@@ -15,7 +15,7 @@ import java.util.Set;
 @ToString
 @EqualsAndHashCode
 @RequiredArgsConstructor
-public final class SetAttribute implements ELCAttribute {
+public final class SetAttribute implements ELCAttribute<SetAttribute> {
     private final String key;
     private final Set<SimpleValue<?>> values;
 
@@ -26,6 +26,11 @@ public final class SetAttribute implements ELCAttribute {
     public SetAttribute add(SimpleValue<?> value) {
         this.values.add(value);
         return this;
+    }
+
+    @Override
+    public SetAttribute withKey(String key) {
+        return new SetAttribute(key, this.values);
     }
 
     @Override

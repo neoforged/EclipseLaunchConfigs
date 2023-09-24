@@ -11,7 +11,7 @@ import java.util.List;
 public abstract class LaunchConfig {
     public abstract String getType();
 
-    public abstract List<ELCAttribute> finishChildren();
+    public abstract List<ELCAttribute<?>> finishChildren();
 
     public void write(Writer outputStream) throws XMLStreamException {
         final XMLOutputFactory outputFactory = XMLOutputFactory.newFactory();
@@ -20,7 +20,7 @@ public abstract class LaunchConfig {
 
         writer.writeStartElement("launchConfiguration");
         writer.writeAttribute("type", getType());
-        for (final ELCAttribute attribute : finishChildren()) {
+        for (final ELCAttribute<?> attribute : finishChildren()) {
             attribute.write(writer, outputFactory);
         }
 

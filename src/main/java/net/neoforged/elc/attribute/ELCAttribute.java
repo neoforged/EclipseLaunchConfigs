@@ -7,9 +7,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
-public interface ELCAttribute {
+public interface ELCAttribute<T extends ELCAttribute<T>> {
     void write(XMLStreamWriter writer, XMLOutputFactory outputFactory) throws XMLStreamException;
+
     String getKey();
+
+    T withKey(String key);
+    default T prependKeyPath(String... path) {
+        return withKey(String.join(".", path) + "." + this.getKey());
+    }
 
     static ListAttribute list(String key, SimpleValue<?>... values) {
         return new ListAttribute(key, new ArrayList<>(Arrays.asList(values)));
