@@ -1,0 +1,21 @@
+plugins {
+    id 'java-library'
+    id 'io.freefair.lombok' version '8.3'
+}
+
+group = 'net.neoforged'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
+
+dependencies {
+    api 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.2'
+    compileOnly 'org.jetbrains:annotations:24.0.1'
+}
