@@ -1,13 +1,14 @@
-package net.neoforged.elc;
+package net.neoforged.elc.configs;
 
 import lombok.Builder;
 import lombok.Builder.Default;
+import net.neoforged.elc.attributes.EAttribute;
+import net.neoforged.elc.attributes.EValue;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-import net.neoforged.elc.attribute.ELCAttribute;
-import net.neoforged.elc.attribute.SimpleValue;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -48,12 +49,12 @@ public final class GradleLaunchConfig extends LaunchConfig {
     }
 
     @Override
-    public List<ELCAttribute<?>> finishChildren() {
-        final List<ELCAttribute<?>> attributes = new ArrayList<>();
+    public List<EAttribute<?>> finishChildren() {
+        final List<EAttribute<?>> attributes = new ArrayList<>();
 
-        attributes.add(ELCAttribute.list("tasks", tasks.stream().map(SimpleValue::string).toArray(SimpleValue[]::new)));
-        attributes.add(ELCAttribute.list("arguments", arguments.stream().map(SimpleValue::string).toArray(SimpleValue[]::new)));
-        attributes.add(ELCAttribute.list("jvm_arguments", jvmArguments.stream().map(SimpleValue::string).toArray(SimpleValue[]::new)));
+        attributes.add(EAttribute.list("tasks", tasks.stream().map(EValue::string).toArray(EValue[]::new)));
+        attributes.add(EAttribute.list("arguments", arguments.stream().map(EValue::string).toArray(EValue[]::new)));
+        attributes.add(EAttribute.list("jvm_arguments", jvmArguments.stream().map(EValue::string).toArray(EValue[]::new)));
 
         addStringIfNotNull(attributes, "working_dir", workingDirectory);
 
@@ -61,16 +62,16 @@ public final class GradleLaunchConfig extends LaunchConfig {
         addStringIfNotNull(attributes, "gradle_user_home", gradleUserHome);
         addStringIfNotNull(attributes, "java_home", javaHome);
 
-        attributes.add(ELCAttribute.bool("offline_mode", offlineMode));
-        attributes.add(ELCAttribute.bool("show_console_view", showConsoleView));
-        attributes.add(ELCAttribute.bool("show_execution_view", showConsoleView));
+        attributes.add(EAttribute.bool("offline_mode", offlineMode));
+        attributes.add(EAttribute.bool("show_console_view", showConsoleView));
+        attributes.add(EAttribute.bool("show_execution_view", showConsoleView));
 
         return attributes;
     }
 
-    private static void addStringIfNotNull(List<ELCAttribute<?>> attributes, String key, @Nullable String value) {
+    private static void addStringIfNotNull(List<EAttribute<?>> attributes, String key, @Nullable String value) {
         if (value != null) {
-            attributes.add(ELCAttribute.string(key, value));
+            attributes.add(EAttribute.string(key, value));
         }
     }
 
