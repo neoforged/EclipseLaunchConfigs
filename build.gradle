@@ -1,6 +1,5 @@
 plugins {
     id 'java-library'
-    id 'io.freefair.lombok' version '8.3'
 }
 
 group = 'net.neoforged'
@@ -11,11 +10,23 @@ repositories {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(8)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
 dependencies {
+    annotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:0.4.2'
     api 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.2'
+    compileOnly 'com.github.bsideup.jabel:jabel-javac-plugin:0.4.2'
     compileOnly 'org.jetbrains:annotations:24.0.1'
+}
+
+// Uses https://github.com/bsideup/jabel to compile to Java 8 from Java 16 source.
+configure([tasks.compileJava]) {
+    sourceCompatibility = 16 // for the IDE support
+    options.release = 8
+
+    javaCompiler = javaToolchains.compilerFor {
+        languageVersion = JavaLanguageVersion.of(16)
+    }
 }
