@@ -4,6 +4,8 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import com.github.bsideup.jabel.Desugar;
+
 /**
  * A Primitive Attribute is one that converts an object to one of the three E-Attribute primitive types.
  * <ul>
@@ -19,20 +21,15 @@ import javax.xml.stream.XMLStreamWriter;
  * @param value       The E-Attribute value attribute.
  * @param stringifier The function by which {@link #value} will be converted to a string for serialization.
  */
+@Desugar
 public record PrimitiveAttribute<T>(String key, EValue<T> value) implements EAttribute {
 
     @Override
     public void write(XMLStreamWriter writer, XMLOutputFactory outputFactory) throws XMLStreamException {
-        writer.writeStartElement(getTypeId(this.value));
+        writer.writeStartElement(this.value.getTypeId());
         writer.writeAttribute("key", this.key);
-        writer.writeAttribute("value", this.value.toString());
+        writer.writeAttribute("value", this.value.serialize());
         writer.writeEndElement();
-    }
-
-    public static String getTypeId(Object o) {
-        if (o.getClass() == Integer.class) return "intAttribute";
-        else if (o.getClass() == Boolean.class) return "booleanAttribute";
-        else return "stringAttribute";
     }
 
 }
