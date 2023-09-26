@@ -47,12 +47,12 @@ public class Main {
                     .enabled(true)
                     .adoptIfRunning(true)
                     .mode(Mode.RUN)
-                    .action(Action.waitForTermination()))
+                    .action(Action.delay(2)))
                 .entry(LaunchGroup.entry("EclipseLaunchConfigs - runTest")
                     .enabled(true)
                     .adoptIfRunning(false)
                     .mode(Mode.DEBUG)
-                    .action(Action.delay(3)))
+                    .action(Action.waitForTermination()))
                 .build());
 
     }
