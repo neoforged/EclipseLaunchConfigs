@@ -7,9 +7,12 @@ import java.util.Map;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.github.bsideup.jabel.Desugar;
+
 import net.neoforged.elc.EclipseVariables;
 import net.neoforged.elc.attributes.EAttribute;
 import net.neoforged.elc.attributes.EValue;
+import net.neoforged.elc.util.Util;
 
 /**
  * This class implements the <code>org.eclipse.jdt.launching.localJavaApplication</code> launch configuration type.
@@ -26,6 +29,7 @@ import net.neoforged.elc.attributes.EValue;
  * @param jreContainer     The specific JRE to use during execution. See {@link Keys#ATTR_JRE_CONTAINER_PATH}.
  * @param extraAttributes  Any additional {@link EAttribute} values not explicitly permitted by this class that may be of relevance to the launch config.
  */
+@Desugar
 public record JavaApplicationLaunchConfig(
     String project, String mainClass, @Nullable String moduleName,
     List<String> arguments, List<String> vmArguments, Map<String, String> envVars,
@@ -49,13 +53,9 @@ public record JavaApplicationLaunchConfig(
             attributes.add(EAttribute.of(Keys.ATTR_MODULE_NAME, this.project));
         }
 
-        if (this.arguments.size() > 0) {
-            attributes.add(EAttribute.of(Keys.ATTR_PROGRAM_ARGUMENTS, this.arguments.stream().<EValue<?>>map(EValue::of).toList()));
-        }
+        attributes.add(EAttribute.of(Keys.ATTR_PROGRAM_ARGUMENTS, argsListToStr(this.arguments)));
 
-        if (this.vmArguments.size() > 0) {
-            attributes.add(EAttribute.of(Keys.ATTR_VM_ARGUMENTS, this.vmArguments.stream().<EValue<?>>map(EValue::of).toList()));
-        }
+        attributes.add(EAttribute.of(Keys.ATTR_VM_ARGUMENTS, argsListToStr(this.vmArguments)));
 
         if (this.envVars.size() > 0) {
             Map<String, EValue<?>> copy = new HashMap<>();
@@ -78,6 +78,10 @@ public record JavaApplicationLaunchConfig(
         attributes.addAll(extraAttributes);
 
         return attributes;
+    }
+
+    public static String argsListToStr(List<String> list) {
+        return list.stream().collect(StringBuilder::new, (sb, str) -> sb.append(" ").append(str), (sb1, sb2) -> sb1.append(sb2.toString())).toString();
     }
 
     /**
@@ -147,24 +151,28 @@ public record JavaApplicationLaunchConfig(
         }
 
         /**
-         * Adds a program argument to the launch config.
+         * Adds one or more program argument to the launch config.
+         * <p>
+         * {@linkplain EclipseVariables eclipse variables} will be resolved in arguments.
          * 
-         * @param argument The argument to add.
+         * @param args The argument(s) to add.
          * @return this
          */
-        public Builder argument(String argument) {
-            this.arguments.add(argument);
+        public Builder args(String... args) {
+            for (String arg : args) this.arguments.add(arg);
             return this;
         }
 
         /**
-         * Adds a JVM argument to the launch config.
+         * Adds one or more JVM argument to the launch config.
+         * <p>
+         * {@linkplain EclipseVariables eclipse variables} will be resolved in arguments.
          * 
-         * @param argument The argument to add.
+         * @param args The argument(s) to add.
          * @return this
          */
-        public Builder vmArgument(String argument) {
-            this.vmArguments.add(argument);
+        public Builder vmArgs(String... args) {
+            for (String arg : args) this.vmArguments.add(arg);
             return this;
         }
 
@@ -236,8 +244,8 @@ public record JavaApplicationLaunchConfig(
          * @return A newly-constructed {@link JavaApplicationLaunchConfig}.
          */
         public JavaApplicationLaunchConfig build(String mainClass) {
-            return new JavaApplicationLaunchConfig(this.project, mainClass, this.moduleName, List.copyOf(this.arguments), List.copyOf(this.vmArguments), Map.copyOf(this.envVars), this.workingDirectory, this.stopInMain,
-                this.jreContainer, List.copyOf(this.extraAttributes));
+            return new JavaApplicationLaunchConfig(this.project, mainClass, this.moduleName, Util.copyOf(this.arguments), Util.copyOf(this.vmArguments), Util.copyOf(this.envVars), this.workingDirectory, this.stopInMain,
+                this.jreContainer, Util.copyOf(this.extraAttributes));
         }
     }
 

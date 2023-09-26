@@ -7,6 +7,8 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import com.github.bsideup.jabel.Desugar;
+
 /**
  * A List Attribute represents the E-Attribute type <code>listAttribute</code>.
  * Due to limitations set by Eclipse, the serialized form must be a list of strings.
@@ -14,6 +16,7 @@ import javax.xml.stream.XMLStreamWriter;
  * @param key   The E-Attribute key attribute.
  * @param value The internal list representing this E-Attribute.
  */
+@Desugar
 public record ListAttribute(String key, List<EValue<?>> values) implements EAttribute {
 
     /**
@@ -29,11 +32,15 @@ public record ListAttribute(String key, List<EValue<?>> values) implements EAttr
     public void write(XMLStreamWriter writer, XMLOutputFactory outputFactory) throws XMLStreamException {
         writer.writeStartElement("listAttribute");
         writer.writeAttribute("key", key);
-        for (EValue<?> value : this.values) {
+        writer.writeCharacters("\n");
+        for (EValue<?> entry : this.values) {
+            writer.writeCharacters("        ");
             writer.writeStartElement("listEntry");
-            writer.writeAttribute("value", value.serialize());
+            writer.writeAttribute("value", entry.serialize());
             writer.writeEndElement();
+            writer.writeCharacters("\n");
         }
+        writer.writeCharacters("    ");
         writer.writeEndElement();
     }
 }

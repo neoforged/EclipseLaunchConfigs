@@ -9,6 +9,8 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import com.github.bsideup.jabel.Desugar;
+
 /**
  * A Map Attribute represents the E-Attribute type <code>mapAttribute</code>.
  * Due to limitations set by Eclipse, the serialized form must be a string-keyed map of strings.
@@ -17,6 +19,7 @@ import javax.xml.stream.XMLStreamWriter;
  * @param data The internal map representing this E-Attribute.
  * @implNote Do not rename <code>data</code> to <code>values</code>, as it will shadow {@link Map#values()}.
  */
+@Desugar
 public record MapAttribute(String key, Map<String, EValue<?>> data) implements EAttribute, Map<String, EValue<?>> {
 
     /**
@@ -32,12 +35,16 @@ public record MapAttribute(String key, Map<String, EValue<?>> data) implements E
     public void write(XMLStreamWriter writer, XMLOutputFactory outputFactory) throws XMLStreamException {
         writer.writeStartElement("mapAttribute");
         writer.writeAttribute("key", key);
+        writer.writeCharacters("\n");
         for (Map.Entry<String, EValue<?>> entry : this.data.entrySet()) {
+            writer.writeCharacters("        ");
             writer.writeStartElement("mapEntry");
             writer.writeAttribute("key", entry.getKey());
             writer.writeAttribute("value", entry.getValue().serialize());
             writer.writeEndElement();
+            writer.writeCharacters("\n");
         }
+        writer.writeCharacters("    ");
         writer.writeEndElement();
     }
 

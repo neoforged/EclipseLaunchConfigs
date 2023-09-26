@@ -23,10 +23,25 @@ dependencies {
 
 // Uses https://github.com/bsideup/jabel to compile to Java 8 from Java 16 source.
 configure([tasks.compileJava]) {
-    sourceCompatibility = 16 // for the IDE support
+    sourceCompatibility = 17 // for the IDE support
     options.release = 8
 
     javaCompiler = javaToolchains.compilerFor {
-        languageVersion = JavaLanguageVersion.of(16)
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+sourceSets.test.java {
+    srcDir 'src/test/java'
+}
+
+tasks.register('hello') {
+    doLast {
+        println 'Hello from Gradle!'
+        if (project.hasProperty('helloReply')){
+        	println helloReply
+        }
+        // Test for --no-daemon launches to verify that the task was invoked.
+    	new File(projectDir, "hello.txt").text = "Hello from Gradle inside a file!"
     }
 }

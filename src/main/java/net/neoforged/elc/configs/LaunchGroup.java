@@ -6,9 +6,12 @@ import java.util.Locale;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.github.bsideup.jabel.Desugar;
+
 import net.neoforged.elc.attributes.EAttribute;
 import net.neoforged.elc.attributes.EValue;
 import net.neoforged.elc.attributes.PrimitiveAttribute;
+import net.neoforged.elc.util.Util;
 
 /**
  * This class implements the <code>org.eclipse.debug.core.groups.GroupLaunchConfigurationType</code> launch configuration type.
@@ -19,6 +22,7 @@ import net.neoforged.elc.attributes.PrimitiveAttribute;
  * 
  * @param entries The list of sub launches to launch.
  */
+@Desugar
 public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
 
     @Override
@@ -51,6 +55,7 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
      * @param mode           The execution mode. See {@link Mode}.
      * @param action         The post-launch action. See {@link Action}.
      */
+    @Desugar
     public static record Entry(int index, String name, boolean enabled, boolean adoptIfRunning, Mode mode, Action action) {
 
         public void bakeAttributes(List<EAttribute> attributes) {
@@ -146,6 +151,7 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
      * @param type  The type of action being taken.
      * @param param Additional data passed to specific {@link ActionType}s.
      */
+    @Desugar
     public static record Action(ActionType type, @Nullable EValue<?> param) {
 
         public static final Action NONE = new Action(ActionType.NONE, null);
@@ -177,7 +183,8 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
          * @param delay The delay, in seconds, that the thread will sleep for.
          */
         public static Action delay(int delay) {
-            return new Action(ActionType.DELAY, EValue.of(delay));
+            // Eclipse expects a stringAttribute holding the delay, for some reason.
+            return new Action(ActionType.DELAY, EValue.of(String.valueOf(delay)));
         }
 
         /**
@@ -257,7 +264,7 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
          * @return A newly-constructed {@link LaunchGroup}.
          */
         public LaunchGroup build() {
-            return new LaunchGroup(List.copyOf(this.entries));
+            return new LaunchGroup(Util.copyOf(this.entries));
         }
 
     }

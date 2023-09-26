@@ -35,11 +35,16 @@ public interface LaunchConfig {
         final XMLOutputFactory outputFactory = XMLOutputFactory.newFactory();
         final XMLStreamWriter writer = outputFactory.createXMLStreamWriter(outputStream);
         writer.writeStartDocument();
+        writer.writeCharacters("\n");
 
         writer.writeStartElement("launchConfiguration");
         writer.writeAttribute("type", getType());
+        writer.writeCharacters("\n");
+
         for (EAttribute attribute : bakeAttributes()) {
+            writer.writeCharacters("    ");
             attribute.write(writer, outputFactory);
+            writer.writeCharacters("\n");
         }
 
         writer.writeEndElement();
