@@ -172,6 +172,8 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
 
         /**
          * The thread controlling the Launch Group will sleep until the current entry has completed execution.
+         * 
+         * @apiNote Eclipse never considers {@link GradleLaunchConfig}s as terminated, and will stall indefinitely.
          */
         public static Action waitForTermination() {
             return new Action(ActionType.WAIT_FOR_TERMINATION, null);
