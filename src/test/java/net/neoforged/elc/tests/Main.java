@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 
 import javax.xml.stream.XMLStreamException;
 
+import net.neoforged.elc.EclipseVariables;
 import net.neoforged.elc.configs.GradleLaunchConfig;
 import net.neoforged.elc.configs.JavaApplicationLaunchConfig;
 import net.neoforged.elc.configs.LaunchConfig;
@@ -17,16 +18,16 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        System.out.println("Test Var 1: " + System.getenv("ELC_TEST_VAR_1"));
-        System.out.println("Test Var 2: " + System.getenv("ELC_TEST_VAR_2"));
+        System.out.println("Prompt: " + System.getenv("PROMPT_VALUE"));
+        System.out.println("Date: " + System.getenv("CURRENT_DATE"));
 
         System.out.println("Args: ");
         for (String s : args) System.out.println(s);
 
         writeLaunchToFile("EclipseLaunchConfigs - runTest",
             JavaApplicationLaunchConfig.builder("EclipseLaunchConfigs")
-                .envVar("ELC_TEST_VAR_1", "the first value")
-                .envVar("ELC_TEST_VAR_2", "the second value")
+                .envVar("PROMPT_VALUE", EclipseVariables.prompt("Enter Something", "Some"))
+                .envVar("CURRENT_DATE", EclipseVariables.currentDate("yyyy/MM/dd"))
                 .vmArgs("-Xmx256M")
                 .args("--doStuff=true")
                 .build("net.neoforged.elc.tests.Main"));
@@ -45,7 +46,7 @@ public class Main {
             LaunchGroup.builder()
                 .entry(LaunchGroup.entry("EclipseLaunchConfigs - runGradle")
                     .enabled(true)
-                    .adoptIfRunning(true)
+                    .adoptIfRunning(false)
                     .mode(Mode.RUN)
                     .action(Action.delay(2)))
                 .entry(LaunchGroup.entry("EclipseLaunchConfigs - runTest")
