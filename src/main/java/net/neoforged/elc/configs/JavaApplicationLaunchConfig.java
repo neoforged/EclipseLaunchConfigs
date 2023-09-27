@@ -178,6 +178,8 @@ public record JavaApplicationLaunchConfig(
 
         /**
          * Adds an environment variable to the launch config.
+         * <p>
+         * Can use {@linkplain EclipseVariables eclipse variables} for value resolution, but not key resolution.
          * 
          * @param key   The key of the env var.
          * @param value The value of the env var.
