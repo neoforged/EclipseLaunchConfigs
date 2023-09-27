@@ -364,9 +364,9 @@ public class EclipseVariables {
     private static String variable(String name, @Nullable String param, @Nullable String param2) {
         if (param2 != null) {
             if (param == null) throw new UnsupportedOperationException("A second parameter may not be provided if the first one is not provided.");
-            return "${%s:%s:%s}".formatted(name, param, param2);
+            return String.format("${%s:%s:%s}", name, param, param2);
         }
-        else if (param != null) return "${%s:%s}".formatted(name, param);
-        else return "${%s}".formatted(name);
+        else if (param != null) return String.format("${%s:%s}", name, param);
+        else return String.format("${%s}", name);
     }
 }
