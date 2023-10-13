@@ -1,1 +1,12 @@
-// rootProject.name = 'eclipselaunchconfigs' TODO - bad IDEA
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url = 'https://maven.neoforged.net/' }
+    }
+
+    plugins {
+        id 'net.neoforged.gradleutils' version '2.0.+'
+    }
+}
+
+rootProject.name = 'EclipseLaunchConfigs'

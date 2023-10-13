@@ -1,8 +1,10 @@
 plugins {
     id 'java-library'
+    id 'net.neoforged.gradleutils'
 }
 
 group = 'net.neoforged'
+version = gradleutils.getTagOffsetVersion()
 
 repositories {
     mavenCentral()
