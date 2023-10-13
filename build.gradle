@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'net.neoforged.gradleutils'
+    id 'maven-publish'
 }
 
 group = 'net.neoforged'
@@ -45,5 +46,41 @@ tasks.register('hello') {
         }
         // Test for --no-daemon launches to verify that the task was invoked.
     	new File(projectDir, "hello.txt").text = "Hello from Gradle inside a file!"
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            pom {
+                name = project.name
+                description = 'A Java library for generating Eclipse Launch Configurations (.launch files).'
+                url = 'https://github.com/NeoForged/EclipseLaunchConfigs'
+
+                scm {
+                    url = 'https://github.com/NeoForged/EclipseLaunchConfigs'
+                    connection = 'scm:git:git://github.com/NeoForged/EclipseLaunchConfigs.git'
+                    developerConnection = 'scm:git:git@github.com:NeoForged/EclipseLaunchConfigs.git'
+                }
+
+                issueManagement {
+                    system = 'github'
+                    url = 'https://github.com/NeoForged/EclipseLaunchConfigs/issues'
+                }
+
+                licenses {
+                    license {
+                        name = 'LGPL 2.1'
+                        url = 'https://github.com/NeoForged/EclipseLaunchConfigs/blob/main/LICENSE'
+                        distribution = 'repo'
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven gradleutils.getPublishingForgeMaven()
     }
 }
