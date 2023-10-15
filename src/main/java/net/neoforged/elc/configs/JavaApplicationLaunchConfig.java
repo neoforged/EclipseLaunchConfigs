@@ -189,6 +189,21 @@ public record JavaApplicationLaunchConfig(
             this.envVars.put(key, value);
             return this;
         }
+        
+        
+        
+        /**
+         * Adds all environment variables to the launch config.
+         * <p>
+         * Can use {@linkplain EclipseVariables eclipse variables} for value resolution, but not key resolution.
+         *
+         * @param values The values and their keys to add.
+         * @return this
+         */
+        public Builder envVar(Map<String, String> values) {
+            this.envVars.putAll(values);
+            return this;
+        }
 
         /**
          * Sets the working directory.
