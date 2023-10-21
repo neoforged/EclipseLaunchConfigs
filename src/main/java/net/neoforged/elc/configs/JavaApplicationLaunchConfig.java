@@ -34,7 +34,7 @@ public record JavaApplicationLaunchConfig(
     String project, String mainClass, @Nullable String moduleName,
     List<String> arguments, List<String> vmArguments, Map<String, String> envVars,
     @Nullable String workingDirectory, boolean stopInMain, @Nullable String jreContainer,
-    List<EAttribute> extraAttributes) implements LaunchConfig {
+    List<EAttribute> extraAttributes, boolean useArgumentsFile) implements LaunchConfig {
 
     @Override
     public String getType() {
@@ -74,6 +74,8 @@ public record JavaApplicationLaunchConfig(
         if (this.jreContainer != null) {
             attributes.add(EAttribute.of(Keys.ATTR_JRE_CONTAINER_PATH, this.jreContainer));
         }
+        
+        attributes.add(EAttribute.of(Keys.ATTR_USE_ARGFILE, this.useArgumentsFile));
 
         attributes.addAll(extraAttributes);
 
@@ -118,6 +120,8 @@ public record JavaApplicationLaunchConfig(
         String jreContainer;
 
         List<EAttribute> extraAttributes = new ArrayList<>();
+        
+        boolean useArgumentsFile = false;
 
         /**
          * Creates a new builder for a specific Eclipse project.
@@ -251,6 +255,26 @@ public record JavaApplicationLaunchConfig(
             this.extraAttributes.add(attr);
             return this;
         }
+        
+        /**
+         * Sets whether eclipse should launch the configuration with an argument file preventing command line length issues.
+         *
+         * @param useArgumentsFile Whether to use an argument file.
+         * @return this
+         */
+        public Builder useArgumentsFile(boolean useArgumentsFile) {
+            this.useArgumentsFile = useArgumentsFile;
+            return this;
+        }
+        
+        /**
+         * Sets eclipse to use an argument file to prevent command line length issues.
+         *
+         * @return this
+         */
+        public Builder useArgumentsFile() {
+            return useArgumentsFile(true);
+        }
 
         /**
          * Builds a {@link JavaApplicationLaunchConfig} targetting a specific main class.
@@ -262,7 +286,7 @@ public record JavaApplicationLaunchConfig(
          */
         public JavaApplicationLaunchConfig build(String mainClass) {
             return new JavaApplicationLaunchConfig(this.project, mainClass, this.moduleName, Util.copyOf(this.arguments), Util.copyOf(this.vmArguments), Util.copyOf(this.envVars), this.workingDirectory, this.stopInMain,
-                this.jreContainer, Util.copyOf(this.extraAttributes));
+                this.jreContainer, Util.copyOf(this.extraAttributes), useArgumentsFile);
         }
     }
 
@@ -388,5 +412,16 @@ public record JavaApplicationLaunchConfig(
          * Default Value: Empty Map
          */
         public static final String ATTR_ENV_VARS = "org.eclipse.debug.core.environmentVariables";
+        
+        /**
+         * Indicates whether eclipse should launch the configuration with an argument file preventing command line length issues.
+         * <p>
+         * E-Attribute type: Boolean
+         * <br>
+         * Required: False
+         * <br>
+         * Default Value: False
+         */
+        public static final String ATTR_USE_ARGFILE = LAUNCHING_PLUGIN_ID + ".ATTR_ATTR_USE_ARGFILE";
     }
 }
