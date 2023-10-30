@@ -219,7 +219,7 @@ public record GradleLaunchConfig(
         /**
          * Sets the <a href="https://docs.gradle.org/current/userguide/build_environment.html">java home</a> used by Gradle.
          * 
-         * @param gradleUserHome The new gradle user home.
+         * @param javaHome The new Java home.
          * @return this
          */
         public Builder javaHome(@Nullable String javaHome) {
@@ -326,7 +326,7 @@ public record GradleLaunchConfig(
          * <p>
          * When specified as an absolute path, the path represents a path in the local
          * file system. When specified as a full path, the path represents a workspace
-         * relative path. When unspecified, the directory of the Eclipse project specified by {@link #ATTR_PROJECT_NAME} is used.
+         * relative path. When unspecified, the directory of the Eclipse project specified by {@link net.neoforged.elc.configs.JavaApplicationLaunchConfig.Keys#ATTR_PROJECT_NAME} is used.
          * <p>
          * E-Attribute type: String
          * <br>

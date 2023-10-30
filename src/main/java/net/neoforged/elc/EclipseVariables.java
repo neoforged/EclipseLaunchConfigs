@@ -22,7 +22,7 @@ public class EclipseVariables {
      * Returns the set of absolute file system paths whose modification caused the current build. A list of the characters, 'a' (added), 'c' (changed), 'r'
      * (removed), 'f' (files only), 'd' (directories only), can be supplied as an argument to limit the file list to just those types of deltas. Defaults to all
      * deltas.
-     * 
+     *
      * @param deltas A string of deltas for limiting the listed files.
      */
     public static String buildFiles(@Nullable String deltas) {
@@ -32,7 +32,7 @@ public class EclipseVariables {
     /**
      * Returns the absolute file system path of the project currently being built, or the absolute file system path of the
      * resource argument interpreted as a path relative to the project currently being built.
-     * 
+     *
      * @param resource A path relative to the project currently being built, specifying a specific resource.
      */
     public static String buildProject(@Nullable String resource) {
@@ -50,7 +50,7 @@ public class EclipseVariables {
      * Returns the absolute file system path of a resource's container.
      * <p>
      * The target resource is the selected resource when unspecified, or the resource identified by a workspace relative path.
-     * 
+     *
      * @param resource The target resource, or null to use the selected resource.
      */
     public static String containerLocation(@Nullable String resource) {
@@ -61,7 +61,7 @@ public class EclipseVariables {
      * Returns the name of a resource's container.
      * <p>
      * The target resource is the selected resource when unspecified, or the resource identified by a workspace relative path.
-     * 
+     *
      * @param resource The target resource, or null to use the selected resource.
      */
     public static String containerName(@Nullable String resource) {
@@ -72,7 +72,7 @@ public class EclipseVariables {
      * Returns the workspace relative path of a resource's container.
      * <p>
      * The target resource is the selected resource when unspecified, or the resource identified by a workspace relative path.
-     * 
+     *
      * @param resource The target resource, or null to use the selected resource.
      */
     public static String containerPath(@Nullable String resource) {
@@ -81,7 +81,7 @@ public class EclipseVariables {
 
     /**
      * Returns the current system time formatted as <code>yyyyMMdd_HHmm</code>.
-     * 
+     *
      * @param dateFormat An optional {@link SimpleDateFormat} pattern.
      */
     public static String currentDate(@Nullable String dateFormat) {
@@ -97,7 +97,7 @@ public class EclipseVariables {
 
     /**
      * Returns the absolute file system path of the JRE home directory corresponding to the specified execution environment.
-     * 
+     *
      * @param id An execution environment identifier, such as <code>JavaSE-1.8</code> or <code>JavaSE-17</code>.
      */
     public static String eeHome(String id) {
@@ -106,7 +106,7 @@ public class EclipseVariables {
 
     /**
      * Returns the value of an environment variable.
-     * 
+     *
      * @param name The name of the environment variable.
      */
     public static String envVar(String name) {
@@ -117,9 +117,9 @@ public class EclipseVariables {
      * Returns the absolute file system path of a file chosen in a file selection dialog.
      * <p>
      * If the second argument is provided, the first must be provided.
-     * 
-     * @param hint    A prompt hint on the dialog title.
-     * @param initial The initial path in the selection dialog.
+     *
+     * @param hint       A prompt hint on the dialog title.
+     * @param initialDir The initial path in the selection dialog.
      */
     public static String filePrompt(@Nullable String hint, @Nullable String initialDir) {
         return variable("file_prompt", hint, initialDir);
@@ -129,9 +129,9 @@ public class EclipseVariables {
      * Returns the absolute file system path of a directory chosen in a directory selection dialog.
      * <p>
      * If the second argument is provided, the first must be provided.
-     * 
-     * @param hint    A prompt hint on the dialog title.
-     * @param initial The initial path in the selection dialog.
+     *
+     * @param hint       A prompt hint on the dialog title.
+     * @param initialDir The initial path in the selection dialog.
      */
     public static String folderPrompt(@Nullable String hint, @Nullable String initialDir) {
         return variable("folder_prompt", hint, initialDir);
@@ -141,7 +141,7 @@ public class EclipseVariables {
      * Returns the current HEAD in the Git repository that contains the selected or referenced resource
      * <p>
      * The target resource is the selected resource when unspecified, or the resource identified by a workspace relative path.
-     * 
+     *
      * @param resource The target resource, or null to use the selected resource.
      */
     public static String gitBranch(@Nullable String resource) {
@@ -152,7 +152,7 @@ public class EclipseVariables {
      * Returns the path to the .git directory for the selected or named resource
      * <p>
      * The target resource is the selected resource when unspecified, or the resource identified by a workspace relative path.
-     * 
+     *
      * @param resource The target resource, or null to use the selected resource.
      */
     public static String gitDir(@Nullable String resource) {
@@ -163,7 +163,7 @@ public class EclipseVariables {
      * Returns the path of a resource relative to the Git repository
      * <p>
      * The target resource is the selected resource when unspecified, or the resource identified by a workspace relative path.
-     * 
+     *
      * @param resource The target resource, or null to use the selected resource.
      */
     public static String gitRepoRelativePath(@Nullable String resource) {
@@ -174,7 +174,7 @@ public class EclipseVariables {
      * Returns the work tree root of the Git repository for a resource.
      * <p>
      * The target resource is the selected resource when unspecified, or the resource identified by a workspace relative path.
-     * 
+     *
      * @param resource The target resource, or null to use the selected resource.
      */
     public static String gitWorkTree(@Nullable String resource) {
@@ -199,7 +199,7 @@ public class EclipseVariables {
      * Returns the text value entered into a password prompt dialog.
      * <p>
      * If the second argument is provided, the first must be provided.
-     * 
+     *
      * @param hint    A prompt hint on the input dialog.
      * @param initial The initial value in the input dialog.
      */
@@ -211,7 +211,7 @@ public class EclipseVariables {
      * Returns the absolute file system path of a resource's project.
      * <p>
      * The target resource is the selected resource when unspecified, or the resource identified by a workspace relative path.
-     * 
+     *
      * @param resource The target resource, or null to use the selected resource.
      */
     public static String projectLocation(@Nullable String resource) {
@@ -222,7 +222,7 @@ public class EclipseVariables {
      * Returns the name of a resource's project.
      * <p>
      * The target resource is the selected resource when unspecified, or the resource identified by a workspace relative path.
-     * 
+     *
      * @param resource The target resource, or null to use the selected resource.
      */
     public static String projectName(@Nullable String resource) {
@@ -233,7 +233,7 @@ public class EclipseVariables {
      * Returns the workspace relative path of a resource's project.
      * <p>
      * The target resource is the selected resource when unspecified, or the resource identified by a workspace relative path.
-     * 
+     *
      * @param resource The target resource, or null to use the selected resource.
      */
     public static String projectPath(@Nullable String resource) {
@@ -244,7 +244,7 @@ public class EclipseVariables {
      * Returns the absolute file system path of a resource.
      * <p>
      * The target resource is the selected resource when unspecified, or the resource identified by a workspace relative path.
-     * 
+     *
      * @param resource The target resource, or null to use the selected resource.
      */
     public static String resourceLocation(@Nullable String resource) {
@@ -255,7 +255,7 @@ public class EclipseVariables {
      * Returns the name of a resource.
      * <p>
      * The target resource is the selected resource when unspecified, or the resource identified by a workspace relative path.
-     * 
+     *
      * @param resource The target resource, or null to use the selected resource.
      */
     public static String resourceName(@Nullable String resource) {
@@ -266,7 +266,7 @@ public class EclipseVariables {
      * Returns the workspace relative path of a resource.
      * <p>
      * The target resource is the selected resource when unspecified, or the resource identified by a workspace relative path.
-     * 
+     *
      * @param resource The target resource, or null to use the selected resource.
      */
     public static String resourcePath(@Nullable String resource) {
@@ -305,7 +305,7 @@ public class EclipseVariables {
      * Returns the text value entered into a prompt dialog.
      * <p>
      * If the second argument is provided, the first must be provided.
-     * 
+     *
      * @param hint    A prompt hint on the input dialog.
      * @param initial The initial value in the input dialog.
      */
@@ -315,7 +315,7 @@ public class EclipseVariables {
 
     /**
      * Returns the value of an Eclipse system variable.
-     * 
+     *
      * @param varName The variable name. One of: ARCH, ECLIPSE_HOME, NL, OS, or WS.
      */
     public static String systemVar(String varName) {
@@ -326,7 +326,7 @@ public class EclipseVariables {
      * Returns the absolute file system path of the external tool.
      * <p>
      * Resolved by finding the first occurrence of the named tool based on the system path specification
-     * 
+     *
      * @param tool The name of the tool.
      */
     public static String systemPath(String tool) {
@@ -335,7 +335,7 @@ public class EclipseVariables {
 
     /**
      * Returns the value of a system property from the Eclipse runtime.
-     * 
+     *
      * @param property The property name.
      */
     public static String systemProperty(String property) {
@@ -346,7 +346,7 @@ public class EclipseVariables {
      * Returns the absolute file system path of the workspace root.
      * <p>
      * If a resource is specified, the absolute file system path of the resource identified by a workspace relative path is returned.
-     * 
+     *
      * @param resource The target resource, or null if one is not being targetted.
      */
     public static String workspaceLocation(@Nullable String resource) {
@@ -363,10 +363,10 @@ public class EclipseVariables {
 
     private static String variable(String name, @Nullable String param, @Nullable String param2) {
         if (param2 != null) {
-            if (param == null) throw new UnsupportedOperationException("A second parameter may not be provided if the first one is not provided.");
+            if (param == null)
+                throw new UnsupportedOperationException("A second parameter may not be provided if the first one is not provided.");
             return String.format("${%s:%s:%s}", name, param, param2);
-        }
-        else if (param != null) return String.format("${%s:%s}", name, param);
+        } else if (param != null) return String.format("${%s:%s}", name, param);
         else return String.format("${%s}", name);
     }
 }

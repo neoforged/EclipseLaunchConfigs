@@ -11,8 +11,6 @@ import javax.xml.stream.XMLStreamWriter;
 
 /**
  * Base class for all Eclipse Attributes.
- *
- * @param <T> The type corresponding to the value of the attribute.
  */
 public interface EAttribute {
 

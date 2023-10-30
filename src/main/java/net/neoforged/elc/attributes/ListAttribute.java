@@ -13,8 +13,8 @@ import com.github.bsideup.jabel.Desugar;
  * A List Attribute represents the E-Attribute type <code>listAttribute</code>.
  * Due to limitations set by Eclipse, the serialized form must be a list of strings.
  * 
- * @param key   The E-Attribute key attribute.
- * @param value The internal list representing this E-Attribute.
+ * @param key    The E-Attribute key attribute.
+ * @param values The internal list representing this E-Attribute.
  */
 @Desugar
 public record ListAttribute(String key, List<EValue<?>> values) implements EAttribute {

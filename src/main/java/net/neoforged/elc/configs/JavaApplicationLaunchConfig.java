@@ -238,7 +238,7 @@ public record JavaApplicationLaunchConfig(
          * 
          * @param jreContainer The target JRE.
          * @return this
-         * @see {@link Keys#ATTR_JRE_CONTAINER_PATH}
+         * @see Keys#ATTR_JRE_CONTAINER_PATH
          */
         public Builder jreContainer(@Nullable String jreContainer) {
             this.jreContainer = jreContainer;

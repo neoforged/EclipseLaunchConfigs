@@ -19,7 +19,6 @@ import com.github.bsideup.jabel.Desugar;
  * @param <T>         The stored type.
  * @param key         The E-Attribute key attribute.
  * @param value       The E-Attribute value attribute.
- * @param stringifier The function by which {@link #value} will be converted to a string for serialization.
  */
 @Desugar
 public record PrimitiveAttribute<T>(String key, EValue<T> value) implements EAttribute {

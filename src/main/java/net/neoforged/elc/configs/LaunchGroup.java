@@ -19,7 +19,7 @@ import net.neoforged.elc.util.Util;
  * This type of config is known in Eclipse as a Launch Group instead of a Launch Configuration.
  * <p>
  * It is used for launching multiple launch configs in sequence.
- * 
+ *
  * @param entries The list of sub launches to launch.
  */
 @Desugar
@@ -47,7 +47,7 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
 
     /**
      * Represents a single launch group entry, which are parameters on how to execute an external {@link LaunchConfig}.
-     * 
+     *
      * @param index          The index of the entry in the Launch Group
      * @param name           The name of the launch configuration that will be executed by this entry.
      * @param enabled        If this entry is enabled, and will be executed when the Launch Group is run.
@@ -56,7 +56,8 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
      * @param action         The post-launch action. See {@link Action}.
      */
     @Desugar
-    public static record Entry(int index, String name, boolean enabled, boolean adoptIfRunning, Mode mode, Action action) {
+    public static record Entry(int index, String name, boolean enabled, boolean adoptIfRunning, Mode mode,
+                               Action action) {
 
         public void bakeAttributes(List<EAttribute> attributes) {
             attributes.add(EAttribute.of(Keys.name(index), name));
@@ -93,7 +94,7 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
 
             /**
              * Sets the enabled state. If this entry is not enabled, it will not be launched.
-             * 
+             *
              * @param enabled If this entry is enabled.
              * @return this
              */
@@ -104,7 +105,7 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
 
             /**
              * Sets the adopt if running flag. It does something™.
-             * 
+             *
              * @param adoptIfRunning The adopt if running flag
              * @return this
              */
@@ -115,10 +116,10 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
 
             /**
              * Sets the launch mode for the target configuration.
-             * 
+             *
              * @param mode The new launch mode.
              * @return this
-             * @see {@link Mode}
+             * @see Mode
              */
             public Builder mode(Mode mode) {
                 this.mode = mode;
@@ -127,10 +128,10 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
 
             /**
              * Sets the post-launch action.
-             * 
+             *
              * @param action The new action.
              * @return this
-             * @see {@link Action}
+             * @see Action
              */
             public Builder action(Action action) {
                 this.action = action;
@@ -147,7 +148,7 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
 
     /**
      * Represents a post-launch action for a Launch Group entry.
-     * 
+     *
      * @param type  The type of action being taken.
      * @param param Additional data passed to specific {@link ActionType}s.
      */
@@ -172,7 +173,7 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
 
         /**
          * The thread controlling the Launch Group will sleep until the current entry has completed execution.
-         * 
+         *
          * @apiNote Eclipse never considers {@link GradleLaunchConfig}s as terminated, and will stall indefinitely.
          */
         public static Action waitForTermination() {
@@ -181,7 +182,7 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
 
         /**
          * The thread controlling the Launch Group will sleep for the specified number of seconds.
-         * 
+         *
          * @param delay The delay, in seconds, that the thread will sleep for.
          */
         public static Action delay(int delay) {
@@ -191,7 +192,7 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
 
         /**
          * The thread controlling the Launch Group will await a response from the entry that matches the specified regular expression.
-         * 
+         *
          * @param regex The regular expression that will be matched against the output of the launch group entry.
          */
         public static Action outputRegexp(String regex) {
@@ -249,7 +250,7 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
 
         /**
          * Adds a new {@linkplain LaunchGroup.Entry launch group entry}.
-         * 
+         *
          * @param entry A builder for the entry being added.
          * @return this
          */
@@ -262,7 +263,7 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
          * Builds a {@link LaunchGroup} from the provided entries.
          * <p>
          * All containers (lists, maps) are copied, so further modification to this builder will not modify the built object.
-         * 
+         *
          * @return A newly-constructed {@link LaunchGroup}.
          */
         public LaunchGroup build() {

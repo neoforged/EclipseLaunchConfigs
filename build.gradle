@@ -41,6 +41,15 @@ sourceSets.test.java {
     srcDir 'src/test/java'
 }
 
+tasks.withType(Javadoc).configureEach {
+    options.tags = [
+            'apiNote:a:<em>API Note:</em>',
+            'implSpec:a:<em>Implementation Requirements:</em>',
+            'implNote:a:<em>Implementation Note:</em>'
+    ]
+    options.addStringOption('Xdoclint:all,-missing', '-public')
+}
+
 tasks.register('hello') {
     doLast {
         println 'Hello from Gradle!'
