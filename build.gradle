@@ -88,6 +88,15 @@ publishing {
                         distribution = 'repo'
                     }
                 }
+
+                developers {
+                    developer {
+                        id = 'neoforged'
+                        name = 'NeoForged'
+                        email = 'contact@neoforged.net'
+                        url = 'https://github.com/NeoForged/'
+                    }
+                }
             }
         }
     }
