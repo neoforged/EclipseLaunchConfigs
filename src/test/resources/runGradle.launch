@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<launchConfiguration type="org.eclipse.buildship.core.launch.runconfiguration">
+    <listAttribute key="tasks">
+        <listEntry value=":hello"></listEntry>
+    </listAttribute>
+    <stringAttribute key="working_dir" value="${workspace_loc:EclipseLaunchConfigs}"></stringAttribute>
+    <stringAttribute key="gradle_distribution" value="GRADLE_DISTRIBUTION(WRAPPER)"></stringAttribute>
+    <booleanAttribute key="offline_mode" value="true"></booleanAttribute>
+    <booleanAttribute key="show_console_view" value="false"></booleanAttribute>
+    <booleanAttribute key="show_execution_view" value="true"></booleanAttribute>
+    <listAttribute key="arguments">
+        <listEntry value="--console=plain"></listEntry>
+        <listEntry value="-PhelloReply=Hello from Eclipse!"></listEntry>
+    </listAttribute>
+    <listAttribute key="jvm_arguments">
+        <listEntry value="-Xmx256M"></listEntry>
+    </listAttribute>
+    <booleanAttribute key="override_workspace_settings" value="true"></booleanAttribute>
+</launchConfiguration>
