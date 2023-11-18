@@ -68,8 +68,9 @@ test {
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        register('mavenJava', MavenPublication) {
             from components.java
+            gradleutils.sign(it)
 
             pom {
                 name = project.name
