@@ -92,3 +92,5 @@ This section details the E-Attributes relevant to the `org.eclipse.jdt.launching
   </mapAttribute>
 </launchConfiguration>
 ```
+
+#### [Prev](./02_EclipseAttributes.md) | [Next](./04_BuildshipLaunches.md)

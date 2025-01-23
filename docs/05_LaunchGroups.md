@@ -71,3 +71,5 @@ Assume we have a launch configuration named `Project_RunGradleTasks` and another
   <stringAttribute key="org.eclipse.debug.core.launchGroup.1.mode" value="inherit"/>
 </launchConfiguration>
 ```
+
+#### [Prev](./04_BuildshipLaunches.md)

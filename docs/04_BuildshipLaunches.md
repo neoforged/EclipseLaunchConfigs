@@ -83,3 +83,5 @@ This section details the E-Attributes relevant to the `org.eclipse.buildship.cor
   </listAttribute>
 </launchConfiguration>
 ```
+
+#### [Prev](./03_NativeLaunches.md) | [Next](./05_LaunchGroups.md)
