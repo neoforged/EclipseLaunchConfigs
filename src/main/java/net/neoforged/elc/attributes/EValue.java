@@ -2,9 +2,6 @@ package net.neoforged.elc.attributes;
 
 import java.util.function.Function;
 
-import com.github.bsideup.jabel.Desugar;
-
-@Desugar
 public record EValue<T>(T value, Function<T, String> serializer) {
 
     public String serialize() {

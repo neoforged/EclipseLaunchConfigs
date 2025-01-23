@@ -4,8 +4,6 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import com.github.bsideup.jabel.Desugar;
-
 /**
  * A Primitive Attribute is one that converts an object to one of the three E-Attribute primitive types.
  * <ul>
@@ -20,7 +18,6 @@ import com.github.bsideup.jabel.Desugar;
  * @param key         The E-Attribute key attribute.
  * @param value       The E-Attribute value attribute.
  */
-@Desugar
 public record PrimitiveAttribute<T>(String key, EValue<T> value) implements EAttribute {
 
     @Override

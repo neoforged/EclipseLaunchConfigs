@@ -7,8 +7,6 @@ import java.util.Map;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.github.bsideup.jabel.Desugar;
-
 import net.neoforged.elc.EclipseVariables;
 import net.neoforged.elc.attributes.EAttribute;
 import net.neoforged.elc.attributes.EValue;
@@ -29,7 +27,6 @@ import net.neoforged.elc.util.Util;
  * @param jreContainer     The specific JRE to use during execution. See {@link Keys#ATTR_JRE_CONTAINER_PATH}.
  * @param extraAttributes  Any additional {@link EAttribute} values not explicitly permitted by this class that may be of relevance to the launch config.
  */
-@Desugar
 public record JavaApplicationLaunchConfig(
     String project, String mainClass, @Nullable String moduleName,
     List<String> arguments, List<String> vmArguments, Map<String, String> envVars,

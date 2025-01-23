@@ -9,8 +9,6 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import com.github.bsideup.jabel.Desugar;
-
 /**
  * A Set Attribute represents the E-Attribute type <code>setAttribute</code>.
  * Due to limitations set by Eclipse, it is explicitly a set of strings.
@@ -18,7 +16,6 @@ import com.github.bsideup.jabel.Desugar;
  * @param key    The E-Attribute key attribute.
  * @param values The internal set representing this E-Attribute.
  */
-@Desugar
 public record SetAttribute(String key, Set<EValue<?>> values) implements EAttribute, Set<EValue<?>> {
 
     /**

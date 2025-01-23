@@ -6,8 +6,6 @@ import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.github.bsideup.jabel.Desugar;
-
 import net.neoforged.elc.EclipseVariables;
 import net.neoforged.elc.attributes.EAttribute;
 import net.neoforged.elc.attributes.EValue;
@@ -33,7 +31,6 @@ import net.neoforged.elc.util.Util;
  * @param jvmArguments       Command-line arguments passed to the JVM before startup.
  * @param overrideWorkspace  If the workspace settings are overridden. If false, most of the settings here are ignored. See {@link Keys#OVERRIDE_WORKSPACE}.
  */
-@Desugar
 public record GradleLaunchConfig(
     List<String> tasks, String workingDirectory, String gradleDistribution,
     boolean offlineMode, boolean showConsoleView, boolean showExecutionView,

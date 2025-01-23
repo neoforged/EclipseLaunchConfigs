@@ -6,8 +6,6 @@ import java.util.Locale;
 
 import org.jetbrains.annotations.Nullable;
 
-import com.github.bsideup.jabel.Desugar;
-
 import net.neoforged.elc.attributes.EAttribute;
 import net.neoforged.elc.attributes.EValue;
 import net.neoforged.elc.attributes.PrimitiveAttribute;
@@ -22,7 +20,6 @@ import net.neoforged.elc.util.Util;
  *
  * @param entries The list of sub launches to launch.
  */
-@Desugar
 public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
 
     @Override
@@ -55,7 +52,6 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
      * @param mode           The execution mode. See {@link Mode}.
      * @param action         The post-launch action. See {@link Action}.
      */
-    @Desugar
     public static record Entry(int index, String name, boolean enabled, boolean adoptIfRunning, Mode mode,
                                Action action) {
 
@@ -152,7 +148,6 @@ public record LaunchGroup(List<Entry> entries) implements LaunchConfig {
      * @param type  The type of action being taken.
      * @param param Additional data passed to specific {@link ActionType}s.
      */
-    @Desugar
     public static record Action(ActionType type, @Nullable EValue<?> param) {
 
         public static final Action NONE = new Action(ActionType.NONE, null);

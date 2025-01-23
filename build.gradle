@@ -27,23 +27,11 @@ java {
 }
 
 dependencies {
-    annotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.0'
     annotationProcessor("net.java.dev.jna:jna-platform:5.13.0")
-    compileOnly 'com.github.bsideup.jabel:jabel-javac-plugin:1.0.0'
     compileOnly 'org.jetbrains:annotations:24.0.1'
 
     testImplementation(libs.junit.api)
     testRuntimeOnly(libs.junit.engine)
-}
-
-// Uses https://github.com/bsideup/jabel to compile to Java 8 from Java 16 source.
-configure([tasks.compileJava]) {
-    sourceCompatibility = 17 // for the IDE support
-    options.release = 8
-
-    javaCompiler = javaToolchains.compilerFor {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
 }
 
 sourceSets.test.java {

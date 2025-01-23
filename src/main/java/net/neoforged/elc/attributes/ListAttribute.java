@@ -7,8 +7,6 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
-import com.github.bsideup.jabel.Desugar;
-
 /**
  * A List Attribute represents the E-Attribute type <code>listAttribute</code>.
  * Due to limitations set by Eclipse, the serialized form must be a list of strings.
@@ -16,7 +14,6 @@ import com.github.bsideup.jabel.Desugar;
  * @param key    The E-Attribute key attribute.
  * @param values The internal list representing this E-Attribute.
  */
-@Desugar
 public record ListAttribute(String key, List<EValue<?>> values) implements EAttribute {
 
     /**
